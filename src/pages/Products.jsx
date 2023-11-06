@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import styled from 'styled-components';
 
 export const Products = () => {
   const [datos, setDatos] = useState([])
@@ -10,17 +11,20 @@ export const Products = () => {
   }, [])
 
   return (
-    <div>
+    <Contenedor>
       {datos.map((datos) => {
         return (
           <>
-            <h1> {datos.title} </h1>
-            <h3> {datos.description}</h3>
+            <h2> {datos.title} </h2>
+            <p> {datos.description}</p>
             <img src={datos.image} />
           </>
           )
       })}
-    </div>
+</Contenedor>    
   )
 
 }
+const Contenedor=styled.div`
+  margin-left:250px;
+`;

@@ -16,32 +16,46 @@ export const NavBar = () => {
   )
 }
 
-
 const Nav = styled.nav`
-background-color: #eeeeee;
- position: sticky;
- top: 0;
- padding: 5px 20px ;
- border: 1px solid #000;
- display: flex;
- justify-content: space-between;
-
-a{
-  text-decoration: none;
-  color: #000;
-}
-
-.logo{
-  color: #000;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.links{
-  width: 50%;
+  background-color: #eeeeee;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height:100vh;
+  padding: 20px;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
+  flex-direction:column;
+  
+  align-items:flex-start;
+  z-index:1000;
+ 
 
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+    margin-bottom:20px;
+  }
+
+  .links {
+    display: flex;
+    flex-direction:column;
+    margin-bottom:20px;
+    font-size:20px;
+    
+
+    a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #ff6600;
+      }
+    }
+  }
 `;

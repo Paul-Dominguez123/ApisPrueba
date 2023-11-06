@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import styled from 'styled-components';
 
 export const RickMorty = () => {
   const [datos, setDatos] = useState({})
@@ -15,12 +16,12 @@ export const RickMorty = () => {
 
   return (
 
-    <div>
+    <Contenedor>
 
      { results ? results.map( (e, i)  => {
       return (
         <>
-          <h1> { e.name } </h1>
+          <h2> { e.name } </h2>
           <img src={e.image} alt="" />
         </>
       )
@@ -28,6 +29,10 @@ export const RickMorty = () => {
       :
       'No tienes nada que mostrar'}
 
-    </div>
+    </Contenedor>
   )
 }
+const Contenedor=styled.div`
+  margin-left:250px;
+  
+`;

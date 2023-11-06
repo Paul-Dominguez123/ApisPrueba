@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react"
+import styled from 'styled-components';
 
 export const Pokemon = () => {
-  const [datos, setDatos] = useState({})
+  const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon')
-      .then((data) => data.json())
-      .then((productos) => setDatos(productos))
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+      .then((response) => response.json())
+      .then((data) => {
+        const promises = data.results.map((pokemon) =>
+          fetch(pokemon.url)
+            .then((response) => response.json())
+            .catch((error) => console.error('Error fetching Pokemon data:', error))
+        );
 
-  }, [])
-
-  const { results } = datos
+        Promise.all(promises)
+          .then((pokemonData) => setPokemonList(pokemonData))
+          .catch((error) => console.error('Error fetching Pokemon data:', error));
+      })
+      .catch((error) => console.error('Error fetching Pokemon list:', error));
+  }, []);
 
   return (
+    <Contenedor>
+     {pokemonList.map((pokemon) => (
+        <div key={pokemon.id}>
+          <h2>{pokemon.name}</h2>
+          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        
+          {/* Agrega más detalles según las propiedades disponibles en el objeto de respuesta */}
+        </div>
+      ))}
+    </Contenedor>
+  );
+};
 
-    <div>
-
-     { results ? results.map( (e, i)  => {
-      return (
-        <>
-          <h1> { e.name } </h1>
-          <h1> { e.name } </h1>
-        </>
-      )
-     }) 
-      :
-      'No tienes nada que mostrar'}
-
-    </div>
-  )
-
-}
-
+const Contenedor=styled.div`
+  margin-left:250px;
+`;
